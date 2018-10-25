@@ -1,4 +1,5 @@
 *.iml
+gradle*
 .gradle
 /local.properties
 /.idea/libraries
