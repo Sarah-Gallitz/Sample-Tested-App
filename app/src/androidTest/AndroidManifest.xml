@@ -3,7 +3,5 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="au.com.seek"
     android:hardwareAccelerated="true">
-
-    <uses-permission android:name="android.permission.SET_ANIMATION_SCALE" />
     <uses-sdk tools:overrideLibrary="android.support.test.uiautomator.v18" />
 </manifest>
