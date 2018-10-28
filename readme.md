@@ -16,8 +16,8 @@ Testing Libraries used:
 #### Examples
 Example branches
 
-- `examples/mvp-callbacks` Shows how to unit test a MVP style app with minimal additional libraries
-- `examples/mvvm-rx [Coming soon]` Shows how to unit test a MVVM style app with RX and retrofit
+- `examples/mvp-callbacks` Shows a way to test a MVP style app with minimal additional libraries
+- `examples/mvvm-rx [Coming soon]` Shows a way to test a MVVM style app with RX and retrofit
 
 #### Running the Ui Tests
 1. Change the setting in build.gradle to either "debug" or "release"
