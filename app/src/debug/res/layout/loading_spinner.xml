@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<sampletestedapp.sarahgallitz.com.sampletestedapp.presentation.UiTestableProgressSpinner
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="@dimen/loading_spinner_size"
-        android:layout_height="@dimen/loading_spinner_size"
-        android:layout_gravity="center"/>

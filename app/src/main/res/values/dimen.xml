@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="loading_spinner_size">48dp</dimen>
-
-    <dimen name="image_list_item_size">152dp</dimen>
-    <dimen name="image_list_item_margin">8dp</dimen>
-</resources>

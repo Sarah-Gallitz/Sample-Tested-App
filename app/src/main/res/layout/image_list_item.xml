@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.AppCompatImageView
-    android:contentDescription="@string/image_list_item_content_description"
-    android:id="@+id/list_item_image_view"
-    android:layout_height="@dimen/image_list_item_size"
-    android:layout_margin="@dimen/image_list_item_margin"
-    android:layout_width="match_parent"
-    android:src="@drawable/image_loading_placeholder"
-    xmlns:android="http://schemas.android.com/apk/res/android" />
