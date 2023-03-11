@@ -4,7 +4,7 @@ import androidx.compose.ui.unit.dp
 
 @Suppress("unused")
 object Spacing {
-    val xSmall = 8.dp
+    val xSmall = 4.dp
     val Small = 8.dp
     val Medium = 16.dp
     val Large = 24.dp
