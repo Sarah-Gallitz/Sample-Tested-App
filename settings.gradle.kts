@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -16,4 +18,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Sample-Tested-App"
 
-include ':app'
+include(":app")
