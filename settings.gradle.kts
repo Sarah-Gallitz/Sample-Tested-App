@@ -19,3 +19,7 @@ dependencyResolutionManagement {
 rootProject.name = "Sample-Tested-App"
 
 include(":app")
+
+include(":core:presentation")
+
+include(":feature:home:presentation")
