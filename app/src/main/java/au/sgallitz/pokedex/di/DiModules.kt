@@ -17,9 +17,7 @@ object DiModules {
         DiHomeDomain.module
     )
 
-    private val presentationModules = listOf<Module>(
-
-    )
+    private val presentationModules = listOf<Module>()
 
     val allModules: List<Module> = appModule
         .plus(dataModules)
