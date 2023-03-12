@@ -15,4 +15,6 @@ android {
 
 dependencies {
     implementation(project(":core:presentation"))
+
+    implementation(project(":feature:home:domain"))
 }

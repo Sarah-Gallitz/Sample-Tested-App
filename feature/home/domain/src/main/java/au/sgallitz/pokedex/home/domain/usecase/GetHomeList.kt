@@ -18,7 +18,7 @@ class GetHomeList() {
                 ),
                 PokemonHomeItem(
                     pokemonId = 2,
-                    name = "bulbasaur",
+                    name = "ivysaur",
                     image = URL("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/2.svg"),
                     pixelArtImage = URL("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png")
                 ),

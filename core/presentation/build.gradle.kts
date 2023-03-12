@@ -22,4 +22,6 @@ dependencies {
     api("androidx.compose.ui:ui-tooling-preview")
     debugApi("androidx.compose.ui:ui-tooling")
     debugApi("androidx.compose.ui:ui-test-manifest")
+
+    api("io.insert-koin:koin-android")
 }

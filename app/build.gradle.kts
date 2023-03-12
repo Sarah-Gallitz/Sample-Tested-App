@@ -15,6 +15,7 @@ dependencies {
     implementation(project(":core:presentation"))
 
     implementation(project(":feature:home:presentation"))
+    implementation(project(":feature:home:domain"))
 
     implementation("io.insert-koin:koin-android")
 }

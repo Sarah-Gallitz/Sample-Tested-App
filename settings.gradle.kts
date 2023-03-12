@@ -21,6 +21,7 @@ rootProject.name = "Sample-Tested-App"
 include(":app")
 
 include(":core:presentation")
+include(":core:domain")
 
 include(":feature:home:presentation")
 include(":feature:home:domain")
