@@ -7,4 +7,4 @@ data class PokemonHomeItem(
     val name: String,
     val image: URL,
     val pixelArtImage: URL
-) : HomeItem
+) : HomeItem()

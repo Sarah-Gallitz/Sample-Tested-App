@@ -1,3 +1,3 @@
 package au.sgallitz.pokedex.home.domain.model
 
-interface HomeItem
+sealed class HomeItem
