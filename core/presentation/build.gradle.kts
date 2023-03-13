@@ -24,4 +24,7 @@ dependencies {
     debugApi("androidx.compose.ui:ui-test-manifest")
 
     api("io.insert-koin:koin-android")
+
+    implementation("io.coil-kt:coil-compose")
+    implementation("io.coil-kt:coil-svg")
 }

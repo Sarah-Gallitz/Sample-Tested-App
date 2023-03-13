@@ -49,10 +49,16 @@ allprojects {
         dependencies {
             val dependencyConstraints = listOf(
                 "androidx.compose:compose-bom:2023.01.00",
+
                 "androidx.activity:activity-compose:1.6.1",
+
                 "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4",
+
                 "io.insert-koin:koin-android:3.2.0",
                 "io.insert-koin:koin-core:3.2.0",
+
+                "io.coil-kt:coil-compose:2.2.2",
+                "io.coil-kt:coil-svg:2.2.2"
             )
 
             configurations.forEach { configuration ->
