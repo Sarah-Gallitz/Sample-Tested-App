@@ -1,8 +1,14 @@
 package au.sgallitz.pokedex.home.presentation
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -12,6 +18,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import au.sgallitz.pokedex.BaseActivity
@@ -39,15 +46,27 @@ class HomeActivity : BaseActivity() {
             LazyVerticalGrid(
                 columns = GridCells.Adaptive(minSize = 144.dp),
                 Modifier
-                    .padding(paddingValues)
+                    .padding(
+                        top = paddingValues.calculateTopPadding(),
+                        start = paddingValues.calculateStartPadding(LocalLayoutDirection.current),
+                        end = paddingValues.calculateEndPadding(LocalLayoutDirection.current)
+                    )
                     .padding(horizontal = Spacing.Medium),
                 verticalArrangement = Arrangement.spacedBy(Spacing.Medium),
                 horizontalArrangement = Arrangement.spacedBy(Spacing.Medium)
             ) {
+                item(span = { GridItemSpan(this.maxLineSpan) }) {
+                    /* adds top padding */
+                }
+
                 items(homeItems.value) { item: HomeItem ->
                     when (item) {
                         is PokemonHomeItem -> PokemonView.RenderPokemonItem(item)
                     }
+                }
+
+                item(span = { GridItemSpan(this.maxLineSpan) }) {
+                    Spacer(Modifier.fillMaxWidth().height(paddingValues.calculateBottomPadding()))
                 }
             }
         }

@@ -1,0 +1,7 @@
+<resources>
+    <item type="bool" name="isLightThemeLightStatusBar">true</item>
+    <item type="bool" name="isDarkThemeLightStatusBar">false</item>
+
+    <item name="lightScrim" type="color">#CCFFFFFF</item>
+    <item name="darkScrim" type="color">#CC000000</item>
+</resources>

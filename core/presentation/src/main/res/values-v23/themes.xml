@@ -1,11 +1,13 @@
 <resources>
     <style name="Theme.Pokedex" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:navigationBarColor">@color/darkScrim</item>
-        <item name="android:statusBarColor">@color/darkScrim</item>
+        <item name="android:statusBarColor">@color/lightScrim</item>
+        <item name="android:windowLightStatusBar">@bool/isLightThemeLightStatusBar</item>
     </style>
 
     <style name="Theme.Pokedex.Dark" parent="android:Theme.Material.NoActionBar">
         <item name="android:navigationBarColor">@color/darkScrim</item>
         <item name="android:statusBarColor">@color/darkScrim</item>
+        <item name="android:windowLightStatusBar">@bool/isDarkThemeLightStatusBar</item>
     </style>
 </resources>
