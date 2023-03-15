@@ -1,4 +1,4 @@
-package au.sgallitz.pokedex.home.presentation
+package au.sgallitz.pokedex.home.presentation.views
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -22,7 +22,7 @@ import java.net.URL
 class PokemonView {
     companion object {
         @Composable
-        fun RenderPokemonItem(item: PokemonHomeItem) {
+        fun Render(item: PokemonHomeItem) {
             Card {
                 Column(
                     Modifier
@@ -52,8 +52,8 @@ class PokemonView {
 
     @Preview
     @Composable
-    private fun PreviewRenderPokemonItem() = ThemedPreview {
-        RenderPokemonItem(
+    private fun PreviewRender() = ThemedPreview {
+        Render(
             item = PokemonHomeItem(
                 1,
                 "bulbasaur",

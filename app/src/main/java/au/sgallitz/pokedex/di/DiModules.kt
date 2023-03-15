@@ -1,6 +1,7 @@
 package au.sgallitz.pokedex.di
 
 import au.sgallitz.pokedex.home.domain.DiHomeDomain
+import au.sgallitz.pokedex.home.presentation.DiHomePresentation
 import au.sgallitz.pokedex.navigation.AppModuleDestinations
 import au.sgallitz.pokedex.navigation.ModuleDestinations
 import org.koin.core.module.Module
@@ -17,7 +18,9 @@ object DiModules {
         DiHomeDomain.module
     )
 
-    private val presentationModules = listOf<Module>()
+    private val presentationModules = listOf(
+        DiHomePresentation.module
+    )
 
     val allModules: List<Module> = appModule
         .plus(dataModules)
