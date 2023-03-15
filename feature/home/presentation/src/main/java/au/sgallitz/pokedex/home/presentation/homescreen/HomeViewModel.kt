@@ -1,6 +1,7 @@
 package au.sgallitz.pokedex.home.presentation.homescreen
 
 import androidx.lifecycle.viewModelScope
+import au.sgallitz.pokedex.core.domain.DomainException
 import au.sgallitz.pokedex.home.domain.usecase.GetHomeList
 import au.sgallitz.pokedex.mvi.MviViewModel
 import kotlinx.coroutines.channels.Channel
@@ -27,8 +28,8 @@ class HomeViewModel(
                 getHomeList.execute().collect {
                     _uiState.value = HomeUiState.HasData(it)
                 }
-            } catch (e: Throwable) {
-                _uiState.value = HomeUiState.HasError
+            } catch (e: DomainException) {
+                _uiState.value = HomeUiState.HasError(e.errorReason)
             }
         }
     }

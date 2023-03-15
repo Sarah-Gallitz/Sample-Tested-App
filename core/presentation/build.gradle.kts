@@ -27,6 +27,8 @@ dependencies {
     api("io.insert-koin:koin-android")
     api("io.insert-koin:koin-androidx-compose")
 
+    api(project(":core:domain"))
+
     implementation("io.coil-kt:coil-compose")
     implementation("io.coil-kt:coil-svg")
 }

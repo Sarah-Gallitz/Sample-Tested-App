@@ -2,12 +2,14 @@ package au.sgallitz.pokedex.home.domain.usecase
 
 import au.sgallitz.pokedex.home.domain.model.HomeItem
 import au.sgallitz.pokedex.home.domain.model.PokemonHomeItem
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import java.net.URL
 
 class GetHomeList() {
-    fun execute(): Flow<List<HomeItem>> {
+    suspend fun execute(): Flow<List<HomeItem>> {
+        delay(1000)
         return flowOf(
             listOf(
                 PokemonHomeItem(

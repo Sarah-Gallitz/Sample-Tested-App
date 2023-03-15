@@ -1,5 +1,7 @@
 package au.sgallitz.pokedex.home.presentation.homescreen
 
+import au.sgallitz.pokedex.core.domain.DomainException
+import au.sgallitz.pokedex.core.domain.ErrorReason
 import au.sgallitz.pokedex.home.domain.model.PokemonHomeItem
 import au.sgallitz.pokedex.home.domain.usecase.GetHomeList
 import au.sgallitz.pokedex.testsetup.shared.UnitTest
@@ -41,11 +43,14 @@ class HomeViewModelTest : UnitTest() {
 
     @Test
     fun `given home view model, when error, then the ui shows the error`() = runTest {
-        coEvery { getHomeList.execute() } throws RuntimeException("Unable to reach the API")
+        coEvery { getHomeList.execute() } throws DomainException(ErrorReason.GeneralError())
 
         subjectUnderTest = create()
 
-        assertEquals(expected = HomeUiState.HasError, actual = subjectUnderTest.uiState.value)
+        assertEquals(
+            expected = HomeUiState.HasError(ErrorReason.GeneralError()),
+            actual = subjectUnderTest.uiState.value
+        )
     }
 
     @Test
