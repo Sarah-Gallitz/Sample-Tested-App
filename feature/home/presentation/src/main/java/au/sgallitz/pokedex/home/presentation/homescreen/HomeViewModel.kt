@@ -28,7 +28,7 @@ class HomeViewModel(
                     _uiState.value = HomeUiState.HasData(it)
                 }
             } catch (e: Throwable) {
-                _uiState.value = HomeUiState.Loading
+                _uiState.value = HomeUiState.HasError
             }
         }
     }

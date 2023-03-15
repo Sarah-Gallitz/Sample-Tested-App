@@ -17,4 +17,6 @@ dependencies {
     implementation(project(":core:presentation"))
 
     implementation(project(":feature:home:domain"))
+
+    testImplementation(project(":testsetup:shared"))
 }

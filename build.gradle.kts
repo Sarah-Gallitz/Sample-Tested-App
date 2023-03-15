@@ -54,13 +54,17 @@ allprojects {
                 "androidx.navigation:navigation-compose:2.5.3",
 
                 "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4",
+                "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4",
 
                 "io.insert-koin:koin-android:3.2.1",
                 "io.insert-koin:koin-androidx-compose:3.2.1",
                 "io.insert-koin:koin-core:3.2.1",
 
                 "io.coil-kt:coil-compose:2.2.2",
-                "io.coil-kt:coil-svg:2.2.2"
+                "io.coil-kt:coil-svg:2.2.2",
+
+                "junit:junit:4.13.2",
+                "io.mockk:mockk:1.13.4"
             )
 
             configurations.forEach { configuration ->

@@ -6,4 +6,6 @@ import au.sgallitz.pokedex.mvi.UiState
 sealed class HomeUiState : UiState {
     data class HasData(val data: List<HomeItem>) : HomeUiState()
     object Loading : HomeUiState()
+
+    object HasError : HomeUiState()
 }

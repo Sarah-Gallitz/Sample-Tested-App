@@ -38,6 +38,7 @@ class HomeScreen : MviScreen<HomeUiState, HomeUiEvent, HomeNavigationRequest>() 
                     homeItems = uiState.data,
                     paddingValues = paddingValues
                 )
+                is HomeUiState.HasError -> {}
             }
         }
     }
