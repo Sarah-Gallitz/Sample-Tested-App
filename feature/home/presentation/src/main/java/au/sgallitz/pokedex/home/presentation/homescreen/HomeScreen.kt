@@ -38,6 +38,9 @@ class HomeScreen : MviScreen<HomeUiState, HomeUiEvent, HomeNavigationRequest>() 
                 is HomeUiState.Loading -> HomeLoadingView.Render(paddingValues)
                 is HomeUiState.HasData -> HomeListView.Render(
                     homeItems = uiState.data,
+                    onBottomOfListReached = {
+                        emit(HomeUiEvent.BottomOfListReached)
+                    },
                     paddingValues = paddingValues
                 )
                 is HomeUiState.HasError -> HomeErrorView.Render(

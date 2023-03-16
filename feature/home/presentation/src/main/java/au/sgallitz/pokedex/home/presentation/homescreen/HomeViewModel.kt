@@ -34,10 +34,22 @@ class HomeViewModel(
         }
     }
 
+    private fun loadNextPage() {
+        viewModelScope.launch {
+            try {
+                getHomeList.fetchNext()
+            } catch (e: DomainException) {
+                // do nothing
+            }
+        }
+    }
+
     override fun process(event: HomeUiEvent) {
         when (event) {
             is HomeUiEvent.BackPressed ->
                 _navigationRequests.trySend(HomeNavigationRequest.CloseHome)
+            is HomeUiEvent.BottomOfListReached ->
+                loadNextPage()
         }
     }
 }
