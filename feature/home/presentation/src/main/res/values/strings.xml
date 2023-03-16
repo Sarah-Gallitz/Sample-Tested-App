@@ -1,0 +1,5 @@
+<resources>
+    <string name="home_title">Pokedex</string>
+    <string name="general_error">Something went wrong. Try that again</string>
+    <string name="no_network">Look\'s like you\'re not connected</string>
+</resources>
