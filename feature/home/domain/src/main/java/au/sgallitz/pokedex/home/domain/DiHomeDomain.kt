@@ -5,6 +5,6 @@ import org.koin.dsl.module
 
 object DiHomeDomain {
     val module = module {
-        factory { GetHomeList() }
+        factory { GetHomeList(homeRepository = get()) }
     }
 }

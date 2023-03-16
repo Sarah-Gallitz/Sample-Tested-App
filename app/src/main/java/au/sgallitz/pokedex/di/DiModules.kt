@@ -1,5 +1,6 @@
 package au.sgallitz.pokedex.di
 
+import au.sgallitz.pokedex.home.data.DiHomeData
 import au.sgallitz.pokedex.home.domain.DiHomeDomain
 import au.sgallitz.pokedex.home.presentation.DiHomePresentation
 import au.sgallitz.pokedex.navigation.AppModuleDestinations
@@ -12,7 +13,9 @@ object DiModules {
         single<ModuleDestinations> { AppModuleDestinations() }
     }
 
-    private val dataModules = listOf<Module>()
+    private val dataModules = listOf(
+        DiHomeData.module
+    )
 
     private val domainModules = listOf(
         DiHomeDomain.module

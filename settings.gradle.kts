@@ -22,8 +22,10 @@ include(":app")
 
 include(":core:presentation")
 include(":core:domain")
+include(":core:data")
 
 include(":testsetup:shared")
 
 include(":feature:home:presentation")
 include(":feature:home:domain")
+include(":feature:home:data")
