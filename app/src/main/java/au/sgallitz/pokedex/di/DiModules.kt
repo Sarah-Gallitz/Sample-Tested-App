@@ -1,5 +1,6 @@
 package au.sgallitz.pokedex.di
 
+import au.sgallitz.pokedex.core.data.DiCoreData
 import au.sgallitz.pokedex.home.data.DiHomeData
 import au.sgallitz.pokedex.home.domain.DiHomeDomain
 import au.sgallitz.pokedex.home.presentation.DiHomePresentation
@@ -14,6 +15,7 @@ object DiModules {
     }
 
     private val dataModules = listOf(
+        DiCoreData.module,
         DiHomeData.module
     )
 

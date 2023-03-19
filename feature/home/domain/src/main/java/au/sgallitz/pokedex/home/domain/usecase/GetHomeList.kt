@@ -27,5 +27,6 @@ class GetHomeList(
         )
 
         items.value = items.value.plus(page)
+        currentPage++
     }
 }

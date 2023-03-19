@@ -7,6 +7,7 @@ plugins {
     id("com.android.library") version "7.4.2" apply false
     id("org.jetbrains.kotlin.android") version "1.8.10" apply false
     id("org.jmailen.kotlinter") version "3.13.0" apply false
+    id("com.apollographql.apollo3") version("3.7.5") apply false
 }
 
 allprojects {
@@ -62,6 +63,8 @@ allprojects {
 
                 "io.coil-kt:coil-compose:2.2.2",
                 "io.coil-kt:coil-svg:2.2.2",
+
+                "com.apollographql.apollo3:apollo-runtime:3.7.5",
 
                 "junit:junit:4.13.2",
                 "io.mockk:mockk:1.13.4"
