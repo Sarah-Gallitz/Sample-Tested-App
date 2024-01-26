@@ -1,12 +1,14 @@
 package au.sgallitz.pokedex.home.presentation.homescreen
 
-import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import au.sgallitz.pokedex.extensions.shadowOnScroll
 import au.sgallitz.pokedex.home.presentation.R
 import au.sgallitz.pokedex.home.presentation.views.HomeErrorView
 import au.sgallitz.pokedex.home.presentation.views.HomeListView
@@ -32,10 +34,11 @@ class HomeScreen : MviScreen<HomeUiState, HomeUiEvent, HomeNavigationRequest>() 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Render(uiState: HomeUiState, emit: (HomeUiEvent) -> Unit) {
-        BackHandler(enabled = true, onBack = { emit(HomeUiEvent.BackPressed) })
+        val gridState = rememberLazyGridState()
         Scaffold(
             topBar = {
                 TopAppBar(
+                    modifier = Modifier.shadowOnScroll(gridState),
                     title = { Text(text = stringResource(R.string.home_title)) }
                 )
             }
@@ -47,6 +50,7 @@ class HomeScreen : MviScreen<HomeUiState, HomeUiEvent, HomeNavigationRequest>() 
                     isLoadingNextPage = uiState.isLoadingNextPage,
                     onBottomOfListReached = { emit(HomeUiEvent.BottomOfListReached) },
                     onPokemonClicked = { emit(HomeUiEvent.PokemonPressed(it)) },
+                    gridState = gridState,
                     paddingValues = paddingValues
                 )
                 is HomeUiState.HasError -> HomeErrorView.Render(

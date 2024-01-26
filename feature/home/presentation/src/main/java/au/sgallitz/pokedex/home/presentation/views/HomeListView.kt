@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
@@ -36,9 +37,9 @@ class HomeListView {
             isLoadingNextPage: Boolean,
             onPokemonClicked: (Int) -> Unit,
             onBottomOfListReached: () -> Unit,
+            gridState: LazyGridState = rememberLazyGridState(),
             paddingValues: PaddingValues
         ) {
-            val gridState = rememberLazyGridState()
             val isAtBottom = gridState.isAtBottom()
             val totalItems = gridState.totalItems()
 
@@ -95,25 +96,25 @@ class HomeListView {
             homeItems = listOf(
                 PokemonHomeItem(
                     1,
-                    "bulbasaur",
+                    "Pokemon",
                     URL("http://test.test"),
                     URL("http://test.test")
                 ),
                 PokemonHomeItem(
                     1,
-                    "bulbasaur",
+                    "Pokemon",
                     URL("http://test.test"),
                     URL("http://test.test")
                 ),
                 PokemonHomeItem(
                     1,
-                    "bulbasaur",
+                    "Pokemon",
                     URL("http://test.test"),
                     URL("http://test.test")
                 ),
                 PokemonHomeItem(
                     1,
-                    "bulbasaur",
+                    "Pokemon",
                     URL("http://test.test"),
                     URL("http://test.test")
                 )

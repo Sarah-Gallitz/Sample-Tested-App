@@ -49,8 +49,6 @@ class HomeViewModel(
 
     override fun process(event: HomeUiEvent) {
         when (event) {
-            is HomeUiEvent.BackPressed ->
-                navigate(HomeNavigationRequest.CloseHome)
             is HomeUiEvent.BottomOfListReached ->
                 loadNextPage()
             is HomeUiEvent.PokemonPressed ->
