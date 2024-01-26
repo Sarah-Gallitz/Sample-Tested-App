@@ -1,30 +1,9 @@
 package au.sgallitz.pokedex.extensions
 
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
-
-@Composable
-fun LazyListState.isAtBottom(): Boolean {
-    return remember(this) {
-        derivedStateOf {
-            val visibleItemsInfo = layoutInfo.visibleItemsInfo
-            if (layoutInfo.totalItemsCount == 0) {
-                false
-            } else {
-                val lastVisibleItem = visibleItemsInfo.last()
-                val viewportSize = layoutInfo.viewportEndOffset + layoutInfo.viewportStartOffset
-
-                (
-                    lastVisibleItem.index + 1 == layoutInfo.totalItemsCount &&
-                        lastVisibleItem.offset + lastVisibleItem.size <= viewportSize
-                    )
-            }
-        }
-    }.value
-}
 
 @Composable
 fun LazyGridState.isAtBottom(): Boolean {

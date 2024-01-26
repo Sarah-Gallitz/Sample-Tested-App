@@ -6,25 +6,24 @@ import au.sgallitz.pokedex.home.domain.repository.HomeRepository
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.api.Optional
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 class GraphqlHomeRepository(
     private val graphQlClient: ApolloClient
 ) : HomeRepository {
-    override suspend fun get(pageNumber: Int, pageSize: Int): List<HomeItem> {
+    override suspend fun get(pageNumber: Int, pageSize: Int): Flow<List<HomeItem>> {
         return withContext(Dispatchers.IO) {
             graphQlClient
                 .query(
                     ListPokemonQuery(
                         limit = Optional.present(pageSize),
-                        offset = Optional.present(pageSize * pageNumber)
+                        offset = Optional.present(pageSize * (pageNumber - 1))
                     )
                 )
                 .toFlow()
                 .map { it.data.toDomain() }
-                .first()
         }
     }
 }

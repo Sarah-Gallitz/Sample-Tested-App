@@ -1,0 +1,52 @@
+[versions]
+kotlinAndroid = "1.9.22"
+androidGradlePlugin = "8.2.2"
+kotlinCoroutines = "1.7.1"
+
+ktLint = "3.13.0"
+
+apollo = "3.7.5"
+koin = "3.5.3"
+coil = "2.2.2"
+
+composeBom = "2023.10.01"
+composeCompiler = "1.5.8"
+androidxActivity = "1.8.2"
+androidxNavigation = "2.7.6"
+
+junit = "4.13.2"
+mockk = "1.13.4"
+
+[libraries]
+compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+compose-compiler = { group = "androidx.compose", name = "compose-compiler", version.ref = "composeCompiler" }
+compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+compose-uitooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+compose-uitooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+compose-uitest-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+
+androidx-compose-activity = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
+androidx-compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }
+
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinCoroutines" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinCoroutines" }
+
+koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
+koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
+koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
+
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+coil-svg = { group = "io.coil-kt", name = "coil-svg", version.ref = "coil" }
+
+graphql-apollo3-runtime = { group = "com.apollographql.apollo3", name = "apollo-runtime", version.ref = "apollo" }
+
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinAndroid" }
+kt-lint = { id = "org.jmailen.kotlinter", version.ref = "ktLint" }
+graphql-apollo3 = { id = "com.apollographql.apollo3", version.ref = "apollo" }

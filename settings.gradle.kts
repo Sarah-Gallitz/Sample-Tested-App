@@ -29,3 +29,7 @@ include(":testsetup:shared")
 include(":feature:home:presentation")
 include(":feature:home:domain")
 include(":feature:home:data")
+
+include(":feature:details:presentation")
+include(":feature:details:domain")
+include(":feature:details:data")

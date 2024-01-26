@@ -20,5 +20,7 @@ apollo {
 dependencies {
     api(project(":core:domain"))
 
-    implementation("com.apollographql.apollo3:apollo-runtime")
+    implementation(libs.graphql.apollo3.runtime)
+    implementation("com.apollographql.apollo3:apollo-normalized-cache:3.7.5")
+    implementation("com.apollographql.apollo3:apollo-normalized-cache-sqlite:3.7.5")
 }

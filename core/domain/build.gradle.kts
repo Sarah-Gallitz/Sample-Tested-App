@@ -3,6 +3,6 @@ plugins {
 }
 
 dependencies {
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-core")
-    api("io.insert-koin:koin-core")
+    api(libs.kotlinx.coroutines.core)
+    api(libs.koin.core)
 }

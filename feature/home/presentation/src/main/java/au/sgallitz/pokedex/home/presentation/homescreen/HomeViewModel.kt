@@ -4,29 +4,23 @@ import androidx.lifecycle.viewModelScope
 import au.sgallitz.pokedex.core.domain.DomainException
 import au.sgallitz.pokedex.home.domain.usecase.GetHomeList
 import au.sgallitz.pokedex.mvi.MviViewModel
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.Flow
+import au.sgallitz.pokedex.navigation.Destinations
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
+    private val destinations: Destinations,
     private val getHomeList: GetHomeList
 ) : MviViewModel<HomeUiState, HomeUiEvent, HomeNavigationRequest>() {
     private val _uiState = MutableStateFlow<HomeUiState>(HomeUiState.Loading)
     override val uiState: StateFlow<HomeUiState> = _uiState
 
-    private val _navigationRequests = Channel<HomeNavigationRequest>(capacity = Channel.UNLIMITED)
-    override val navigationRequests: Flow<HomeNavigationRequest> by lazy {
-        _navigationRequests.receiveAsFlow()
-    }
-
     init {
         viewModelScope.launch {
             try {
                 getHomeList.execute().collect {
-                    _uiState.value = HomeUiState.HasData(it)
+                    _uiState.value = HomeUiState.HasData(it, false)
                 }
             } catch (e: DomainException) {
                 _uiState.value = HomeUiState.HasError(e.errorReason)
@@ -37,8 +31,17 @@ class HomeViewModel(
     private fun loadNextPage() {
         viewModelScope.launch {
             try {
+                (_uiState.value as? HomeUiState.HasData)?.let {
+                    _uiState.value = it.copy(isLoadingNextPage = true)
+                }
                 getHomeList.fetchNext()
+                (_uiState.value as? HomeUiState.HasData)?.let {
+                    _uiState.value = it.copy(isLoadingNextPage = false)
+                }
             } catch (e: DomainException) {
+                (_uiState.value as? HomeUiState.HasData)?.let {
+                    _uiState.value = it.copy(isLoadingNextPage = false)
+                }
                 // do nothing
             }
         }
@@ -47,9 +50,11 @@ class HomeViewModel(
     override fun process(event: HomeUiEvent) {
         when (event) {
             is HomeUiEvent.BackPressed ->
-                _navigationRequests.trySend(HomeNavigationRequest.CloseHome)
+                navigate(HomeNavigationRequest.CloseHome)
             is HomeUiEvent.BottomOfListReached ->
                 loadNextPage()
+            is HomeUiEvent.PokemonPressed ->
+                navigate(HomeNavigationRequest.OpenPokemon(destinations, event.pokemonId))
         }
     }
 }

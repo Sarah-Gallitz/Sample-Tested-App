@@ -8,9 +8,8 @@ plugins {
 android {
     namespace = "au.sgallitz.pokedex.home.presentation"
 
-    buildFeatures {
-        compose = true
-    }
+    buildFeatures { compose = true }
+    composeOptions { kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get() }
 }
 
 dependencies {

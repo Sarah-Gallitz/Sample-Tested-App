@@ -2,8 +2,10 @@ package au.sgallitz.pokedex.home.domain.usecase
 
 import au.sgallitz.pokedex.home.domain.model.HomeItem
 import au.sgallitz.pokedex.home.domain.repository.HomeRepository
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.first
 
 class GetHomeList(
     private val homeRepository: HomeRepository
@@ -15,18 +17,25 @@ class GetHomeList(
     private val items = MutableStateFlow(emptyList<HomeItem>())
     private var currentPage = 1
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     suspend fun execute(): Flow<List<HomeItem>> {
         fetchNext()
         return items
     }
 
     suspend fun fetchNext() {
-        val page = homeRepository.get(
-            pageNumber = currentPage,
-            pageSize = PAGE_SIZE
-        )
+        println("XXXXXX Fetching $currentPage")
+        val page = homeRepository
+            .get(
+                pageNumber = currentPage,
+                pageSize = PAGE_SIZE
+            )
+            .first()
 
-        items.value = items.value.plus(page)
+        items.emit(items.value.plus(page))
+
+        println("XXXXXX Page $currentPage with items ${page.size}")
+
         currentPage++
     }
 }

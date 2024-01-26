@@ -18,6 +18,12 @@ import org.koin.core.scope.Scope
 class HomeScreen : MviScreen<HomeUiState, HomeUiEvent, HomeNavigationRequest>() {
     override val route = "home"
 
+    companion object {
+        fun destination(): String {
+            return "home"
+        }
+    }
+
     @Composable
     override fun getViewModel(scope: Scope): HomeViewModel {
         return koinViewModel(scope = scope)
@@ -38,9 +44,9 @@ class HomeScreen : MviScreen<HomeUiState, HomeUiEvent, HomeNavigationRequest>() 
                 is HomeUiState.Loading -> HomeLoadingView.Render(paddingValues)
                 is HomeUiState.HasData -> HomeListView.Render(
                     homeItems = uiState.data,
-                    onBottomOfListReached = {
-                        emit(HomeUiEvent.BottomOfListReached)
-                    },
+                    isLoadingNextPage = uiState.isLoadingNextPage,
+                    onBottomOfListReached = { emit(HomeUiEvent.BottomOfListReached) },
+                    onPokemonClicked = { emit(HomeUiEvent.PokemonPressed(it)) },
                     paddingValues = paddingValues
                 )
                 is HomeUiState.HasError -> HomeErrorView.Render(

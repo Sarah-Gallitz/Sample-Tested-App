@@ -1,5 +1,6 @@
 package au.sgallitz.pokedex.home.presentation.views
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,15 +23,17 @@ import java.net.URL
 class PokemonView {
     companion object {
         @Composable
-        fun Render(item: PokemonHomeItem) {
-            Card {
+        fun Render(
+            item: PokemonHomeItem,
+            onItemClicked: () -> Unit
+        ) {
+            Card(
+                Modifier.clickable { onItemClicked() }
+            ) {
                 Column(
                     Modifier
                         .fillMaxWidth()
-                        .padding(
-                            horizontal = Spacing.Medium,
-                            vertical = Spacing.Large
-                        ),
+                        .padding(horizontal = Spacing.Medium, vertical = Spacing.Large),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     RemoteImage(
@@ -59,7 +62,8 @@ class PokemonView {
                 "bulbasaur",
                 URL("http://test.test"),
                 URL("http://test.test")
-            )
+            ),
+            onItemClicked = {}
         )
     }
 }

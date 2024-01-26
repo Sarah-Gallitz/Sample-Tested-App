@@ -1,6 +1,7 @@
-package au.sgallitz.pokedex.navigation
+package au.sgallitz.pokedex.extensions
 
 import android.app.Activity
+import android.content.Intent
 import androidx.navigation.NavController
 
 fun NavController.closeCurrentActivity() {
@@ -17,4 +18,8 @@ fun NavController.closeCurrentScreen() {
     if (!didPopBackStack) {
         this.closeCurrentActivity()
     }
+}
+
+fun NavController.openActivityIntent(intent: Intent) {
+    this.context.startActivity(intent)
 }

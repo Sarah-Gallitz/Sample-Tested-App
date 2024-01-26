@@ -9,6 +9,9 @@ android {
     defaultConfig {
         applicationId = "au.sgallitz.pokedex"
     }
+
+    buildFeatures { compose = true }
+    composeOptions { kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get() }
 }
 
 dependencies {
@@ -20,5 +23,9 @@ dependencies {
     implementation(project(":feature:home:domain"))
     implementation(project(":feature:home:data"))
 
-    implementation("io.insert-koin:koin-android")
+    implementation(project(":feature:details:presentation"))
+    implementation(project(":feature:details:domain"))
+    implementation(project(":feature:details:data"))
+
+    implementation(libs.coil.compose)
 }

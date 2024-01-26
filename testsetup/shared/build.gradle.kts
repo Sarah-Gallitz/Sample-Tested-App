@@ -3,10 +3,10 @@ plugins {
 }
 
 dependencies {
-    api("junit:junit")
+    api(libs.junit)
     api(kotlin("test"))
 
-    api("io.mockk:mockk")
+    api(libs.mockk)
 
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-test")
+    api(libs.kotlinx.coroutines.test)
 }

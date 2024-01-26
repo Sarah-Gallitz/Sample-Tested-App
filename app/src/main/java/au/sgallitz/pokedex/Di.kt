@@ -1,30 +1,35 @@
-package au.sgallitz.pokedex.di
+package au.sgallitz.pokedex
 
 import au.sgallitz.pokedex.core.data.DiCoreData
+import au.sgallitz.pokedex.details.data.DiDetailsData
+import au.sgallitz.pokedex.details.domain.DiDetailsDomain
+import au.sgallitz.pokedex.details.presentation.DiDetailsPresentation
 import au.sgallitz.pokedex.home.data.DiHomeData
 import au.sgallitz.pokedex.home.domain.DiHomeDomain
 import au.sgallitz.pokedex.home.presentation.DiHomePresentation
-import au.sgallitz.pokedex.navigation.AppModuleDestinations
-import au.sgallitz.pokedex.navigation.ModuleDestinations
+import au.sgallitz.pokedex.navigation.Destinations
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-object DiModules {
+object Di {
     private val appModule = module {
-        single<ModuleDestinations> { AppModuleDestinations() }
+        single<Destinations> { AppDestinations() }
     }
 
     private val dataModules = listOf(
         DiCoreData.module,
-        DiHomeData.module
+        DiHomeData.module,
+        DiDetailsData.module
     )
 
     private val domainModules = listOf(
-        DiHomeDomain.module
+        DiHomeDomain.module,
+        DiDetailsDomain.module
     )
 
     private val presentationModules = listOf(
-        DiHomePresentation.module
+        DiHomePresentation.module,
+        DiDetailsPresentation.module
     )
 
     val allModules: List<Module> = appModule
