@@ -1,13 +1,9 @@
 package au.sgallitz.pokedex.components
 
 import android.content.Context
-import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
-import coil.Coil
 import coil.ImageLoader
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
@@ -15,7 +11,6 @@ import coil.decode.SvgDecoder
 import coil.disk.DiskCache
 import coil.memory.MemoryCache
 import coil.request.ImageRequest
-import coil.request.SuccessResult
 import java.net.URL
 
 fun createRemoteImageLoader(context: Context): ImageLoader {
@@ -62,17 +57,4 @@ fun URL.getImageRequest(): ImageRequest {
     }
 
     return builder.build()
-}
-
-suspend fun Context.loadImage(url: URL?): ImageBitmap? {
-    url ?: return null
-
-    val loader = Coil.imageLoader(this)
-    val request = ImageRequest.Builder(this)
-        .data(url.toString())
-        .allowHardware(false)
-        .build()
-
-    val result = (loader.execute(request) as SuccessResult).drawable
-    return (result as? BitmapDrawable)?.bitmap?.asImageBitmap()
 }

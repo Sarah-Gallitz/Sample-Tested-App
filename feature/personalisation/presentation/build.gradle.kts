@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "au.sgallitz.pokedex.details.presentation"
+    namespace = "au.sgallitz.pokedex.personalisation.presentation"
 
     buildFeatures { compose = true }
     composeOptions { kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get() }
@@ -15,9 +15,6 @@ android {
 dependencies {
     implementation(project(":core:presentation"))
 
-    implementation(project(":feature:details:domain"))
-
-    implementation(project(":feature:personalisation:presentation"))
     implementation(project(":feature:personalisation:domain"))
 
     testImplementation(project(":testsetup:shared"))

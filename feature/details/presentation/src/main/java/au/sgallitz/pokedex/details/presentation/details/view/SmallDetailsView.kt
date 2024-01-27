@@ -1,7 +1,9 @@
 package au.sgallitz.pokedex.details.presentation.details.view
 
+import android.content.res.Configuration
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,6 +24,7 @@ import androidx.compose.material.icons.rounded.MailOutline
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,6 +34,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import au.sgallitz.pokedex.components.ScalableRemoteImage
 import au.sgallitz.pokedex.details.presentation.details.DetailsUiState.HasData.PokemonData
+import au.sgallitz.pokedex.personalisation.presentation.PokemonTheme
+import au.sgallitz.pokedex.personalisation.presentation.preview.getBulbasaurColors
 import au.sgallitz.pokedex.theme.ThemedPreview
 import java.net.URL
 
@@ -104,17 +109,39 @@ class SmallDetailsView {
         }
     }
 
-    @Preview
+    @Preview(uiMode = Configuration.UI_MODE_NIGHT_NO)
     @Composable
-    private fun PreviewRender() = ThemedPreview {
-        Render(
-            PokemonData(
-                1,
-                "Bulbasaur",
-                "#0001",
-                URL("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/1.gif"),
-                URL("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/1.gif")
-            )
-        )
+    private fun PreviewRenderLight() = ThemedPreview {
+        PokemonTheme.WithColors(getBulbasaurColors(isSystemInDarkTheme())) {
+            Surface {
+                Render(
+                    PokemonData(
+                        1,
+                        "Bulbasaur",
+                        "#0001",
+                        URL("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/1.gif"),
+                        getBulbasaurColors(isSystemInDarkTheme())
+                    )
+                )
+            }
+        }
+    }
+
+    @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+    @Composable
+    private fun PreviewRenderDark() = ThemedPreview {
+        PokemonTheme.WithColors(getBulbasaurColors(isSystemInDarkTheme())) {
+            Surface {
+                Render(
+                    PokemonData(
+                        1,
+                        "Bulbasaur",
+                        "#0001",
+                        URL("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/1.gif"),
+                        getBulbasaurColors(isSystemInDarkTheme())
+                    )
+                )
+            }
+        }
     }
 }

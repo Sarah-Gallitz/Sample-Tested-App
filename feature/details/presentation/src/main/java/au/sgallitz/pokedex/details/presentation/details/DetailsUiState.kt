@@ -2,6 +2,7 @@ package au.sgallitz.pokedex.details.presentation.details
 
 import au.sgallitz.pokedex.core.domain.ErrorReason
 import au.sgallitz.pokedex.mvi.UiState
+import au.sgallitz.pokedex.personalisation.domain.model.PokemonColors
 import java.net.URL
 
 sealed class DetailsUiState : UiState {
@@ -12,7 +13,7 @@ sealed class DetailsUiState : UiState {
             val pokemonName: String,
             val pokemonNumber: String,
             val animation: URL,
-            val themeImage: URL
+            val pokemonColors: PokemonColors
         )
     }
     data class HasError(val errorReason: ErrorReason) : DetailsUiState()

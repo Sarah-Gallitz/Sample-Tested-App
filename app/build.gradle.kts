@@ -27,5 +27,9 @@ dependencies {
     implementation(project(":feature:details:domain"))
     implementation(project(":feature:details:data"))
 
+    implementation(project(":feature:personalisation:presentation"))
+    implementation(project(":feature:personalisation:domain"))
+    implementation(project(":feature:personalisation:data"))
+
     implementation(libs.coil.compose)
 }

@@ -33,3 +33,7 @@ include(":feature:home:data")
 include(":feature:details:presentation")
 include(":feature:details:domain")
 include(":feature:details:data")
+
+include(":feature:personalisation:presentation")
+include(":feature:personalisation:domain")
+include(":feature:personalisation:data")

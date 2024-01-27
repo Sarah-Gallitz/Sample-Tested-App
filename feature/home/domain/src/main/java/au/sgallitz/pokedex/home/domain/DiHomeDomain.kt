@@ -5,6 +5,8 @@ import org.koin.dsl.module
 
 object DiHomeDomain {
     val module = module {
-        factory { GetHomeList(homeRepository = get()) }
+        factory {
+            GetHomeList(homeRepository = get(), preGeneratePokemonColors = get())
+        }
     }
 }

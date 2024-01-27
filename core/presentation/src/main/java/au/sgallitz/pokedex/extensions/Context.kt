@@ -1,6 +1,7 @@
 package au.sgallitz.pokedex.extensions
 
 import android.content.Context
+import android.content.res.Configuration
 import android.util.TypedValue
 import androidx.annotation.AttrRes
 import androidx.compose.ui.graphics.Color
@@ -12,4 +13,9 @@ fun Context.getColorFromAttribute(@AttrRes attr: Int): Color {
     val color = ContextCompat.getColor(this, typedValue.resourceId)
 
     return Color(color)
+}
+
+fun Context.isSystemInDarkTheme(): Boolean {
+    val uiMode = this.resources.configuration.uiMode
+    return (uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
 }

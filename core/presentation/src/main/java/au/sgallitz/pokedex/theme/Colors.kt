@@ -29,7 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import au.sgallitz.pokedex.theme.Colors.getColorScheme
 
-internal object Colors {
+object Colors {
     @Composable
     fun getColorScheme(isDarkTheme: Boolean = isSystemInDarkTheme()): ColorScheme {
         return getColorScheme(LocalContext.current, isDarkTheme)

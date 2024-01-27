@@ -19,7 +19,7 @@ import au.sgallitz.pokedex.details.presentation.details.view.DetailsLoadingView
 import au.sgallitz.pokedex.details.presentation.details.view.DetailsView
 import au.sgallitz.pokedex.extensions.shadowOnScroll
 import au.sgallitz.pokedex.mvi.MviScreen
-import au.sgallitz.pokedex.theme.Styles.ContentColoredTheme
+import au.sgallitz.pokedex.personalisation.presentation.PokemonTheme
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.scope.Scope
 
@@ -43,7 +43,7 @@ class DetailsScreen : MviScreen<DetailsUiState, DetailsUiEvent, DetailsNavigatio
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Render(uiState: DetailsUiState, emit: (DetailsUiEvent) -> Unit) {
-        ContentColoredTheme((uiState as? DetailsUiState.HasData)?.data?.themeImage) {
+        PokemonTheme.WithColors((uiState as? DetailsUiState.HasData)?.data?.pokemonColors) {
             BackHandler(enabled = true, onBack = { emit(DetailsUiEvent.BackPressed) })
             val scrollState = rememberScrollState()
             Scaffold(
