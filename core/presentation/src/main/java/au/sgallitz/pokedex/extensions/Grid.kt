@@ -35,9 +35,11 @@ fun LazyGridState.isAtTop(): Boolean {
                 true
             } else {
                 val firstVisibleItem = visibleItemsInfo.first()
-                (firstVisibleItem.index == 0 &&
+                (
+                    firstVisibleItem.index == 0 &&
                         firstVisibleItem.offset.x == 0 &&
-                        firstVisibleItem.offset.y == 0)
+                        firstVisibleItem.offset.y == 0
+                    )
             }
         }
     }.value

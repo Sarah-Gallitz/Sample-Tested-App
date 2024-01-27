@@ -16,6 +16,7 @@ dependencies {
     api(project(":core:domain"))
 
     api(platform(libs.compose.bom))
+
     api(libs.compose.material3)
     api(libs.compose.uitooling.preview)
     
@@ -28,6 +29,8 @@ dependencies {
     debugApi(libs.compose.uitooling)
     debugApi(libs.compose.uitest.manifest)
 
+    implementation(libs.material)
     implementation(libs.coil.compose)
     implementation(libs.coil.svg)
+    implementation(libs.coil.gif)
 }

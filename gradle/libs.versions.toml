@@ -13,6 +13,7 @@ composeBom = "2023.10.01"
 composeCompiler = "1.5.8"
 androidxActivity = "1.8.2"
 androidxNavigation = "2.7.6"
+material = "1.11.0"
 
 junit = "4.13.2"
 mockk = "1.13.4"
@@ -27,6 +28,7 @@ compose-uitest-manifest = { group = "androidx.compose.ui", name = "ui-test-manif
 
 androidx-compose-activity = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
 androidx-compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinCoroutines" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinCoroutines" }
@@ -37,6 +39,7 @@ koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin"
 
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 coil-svg = { group = "io.coil-kt", name = "coil-svg", version.ref = "coil" }
+coil-gif = { group = "io.coil-kt", name = "coil-gif", version.ref = "coil" }
 
 graphql-apollo3-runtime = { group = "com.apollographql.apollo3", name = "apollo-runtime", version.ref = "apollo" }
 

@@ -5,6 +5,13 @@ import java.net.URL
 data class PokemonDetails(
     val pokemonId: Int,
     val name: String,
-    val image: URL,
-    val pixelArtImage: URL
+    val images: Images
+)
+
+data class Images(
+    val dreamworld: URL,
+    val femaleAnim: URL,
+    val maleAnim: URL,
+    val femaleAnimShiny: URL,
+    val maleAnimShiny: URL
 )

@@ -6,5 +6,5 @@ data class PokemonHomeItem(
     val pokemonId: Int,
     val name: String,
     val image: URL,
-    val pixelArtImage: URL
+    val dreamworldImage: URL
 ) : HomeItem()

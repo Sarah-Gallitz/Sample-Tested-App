@@ -1,8 +1,10 @@
 package au.sgallitz.pokedex.theme
 
+import android.content.Context
 import android.os.Build
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,16 +31,20 @@ import au.sgallitz.pokedex.theme.Colors.getColorScheme
 
 internal object Colors {
     @Composable
-    fun getColorScheme(isDarkTheme: Boolean): ColorScheme {
+    fun getColorScheme(isDarkTheme: Boolean = isSystemInDarkTheme()): ColorScheme {
+        return getColorScheme(LocalContext.current, isDarkTheme)
+    }
+
+    fun getColorScheme(context: Context, isDarkTheme: Boolean): ColorScheme {
         // Dynamic color is available on Android 12+
         val isDynamicColorAvailable = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
 
         return when {
             isDynamicColorAvailable && isDarkTheme ->
-                dynamicDarkColorScheme(LocalContext.current)
+                dynamicDarkColorScheme(context)
 
             isDynamicColorAvailable && !isDarkTheme ->
-                dynamicLightColorScheme(LocalContext.current)
+                dynamicLightColorScheme(context)
 
             isDarkTheme ->
                 darkColorScheme()

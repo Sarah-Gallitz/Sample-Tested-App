@@ -38,7 +38,7 @@ class HomeListView {
             onPokemonClicked: (Int) -> Unit,
             onBottomOfListReached: () -> Unit,
             gridState: LazyGridState = rememberLazyGridState(),
-            paddingValues: PaddingValues
+            paddingValues: PaddingValues = PaddingValues()
         ) {
             val isAtBottom = gridState.isAtBottom()
             val totalItems = gridState.totalItems()
@@ -67,9 +67,12 @@ class HomeListView {
             ) {
                 items(homeItems) { item: HomeItem ->
                     when (item) {
-                        is PokemonHomeItem -> PokemonView.Render(
-                            item,
-                            { onPokemonClicked(item.pokemonId) })
+                        is PokemonHomeItem -> {
+                            PokemonView.Render(
+                                item,
+                                onItemClicked = { onPokemonClicked(item.pokemonId) }
+                            )
+                        }
                     }
                 }
 
@@ -121,8 +124,7 @@ class HomeListView {
             ),
             isLoadingNextPage = true,
             onPokemonClicked = {},
-            onBottomOfListReached = {},
-            paddingValues = PaddingValues(all = 0.dp)
+            onBottomOfListReached = {}
         )
     }
 }

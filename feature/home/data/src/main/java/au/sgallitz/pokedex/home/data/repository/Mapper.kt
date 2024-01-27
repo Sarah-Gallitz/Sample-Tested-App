@@ -10,7 +10,7 @@ internal fun ListPokemonQuery.Data?.toDomain(): List<PokemonHomeItem> {
             pokemonId = pokemon?.id ?: 1,
             name = pokemon?.name ?: "1",
             image = URL(pokemon!!.image!!),
-            pixelArtImage = URL(pokemon!!.dreamworld!!)
+            dreamworldImage = URL(pokemon!!.dreamworld!!)
         )
     } ?: emptyList()
 }

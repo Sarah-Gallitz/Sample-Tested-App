@@ -6,6 +6,8 @@ import org.koin.dsl.module
 
 object DiDetailsData {
     val module = module {
-        single<PokemonDetailsRepository> { RemotePokemonDetailsRepository() }
+        single<PokemonDetailsRepository> {
+            RemotePokemonDetailsRepository(get())
+        }
     }
 }

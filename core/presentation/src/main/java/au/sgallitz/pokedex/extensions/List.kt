@@ -18,12 +18,12 @@ fun LazyListState.isAtBottom(): Boolean {
                 val viewportSize = layoutInfo.viewportSize
 
                 (
-                        lastVisibleItem.index + 1 == layoutInfo.totalItemsCount &&
-                                when (layoutInfo.orientation) {
-                                    Orientation.Vertical -> lastVisibleItem.offset + lastVisibleItem.size <= viewportSize.height
-                                    Orientation.Horizontal -> lastVisibleItem.offset + lastVisibleItem.size <= viewportSize.width
-                                }
-                        )
+                    lastVisibleItem.index + 1 == layoutInfo.totalItemsCount &&
+                        when (layoutInfo.orientation) {
+                            Orientation.Vertical -> lastVisibleItem.offset + lastVisibleItem.size <= viewportSize.height
+                            Orientation.Horizontal -> lastVisibleItem.offset + lastVisibleItem.size <= viewportSize.width
+                        }
+                    )
             }
         }
     }.value
