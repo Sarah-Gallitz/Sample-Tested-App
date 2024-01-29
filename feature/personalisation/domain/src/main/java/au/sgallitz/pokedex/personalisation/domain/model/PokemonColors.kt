@@ -1,35 +1,6 @@
 package au.sgallitz.pokedex.personalisation.domain.model
 
 data class PokemonColors(
-    val isDarkTheme: Boolean,
-
-    val primary: String,
-    val onPrimary: String,
-    val primaryContainer: String,
-    val onPrimaryContainer: String,
-    val inversePrimary: String,
-    val secondary: String,
-    val onSecondary: String,
-    val secondaryContainer: String,
-    val onSecondaryContainer: String,
-    val tertiary: String,
-    val onTertiary: String,
-    val tertiaryContainer: String,
-    val onTertiaryContainer: String,
-    val background: String,
-    val onBackground: String,
-    val surface: String,
-    val onSurface: String,
-    val surfaceVariant: String,
-    val onSurfaceVariant: String,
-    val surfaceTint: String,
-    val inverseSurface: String,
-    val inverseOnSurface: String,
-    val error: String,
-    val onError: String,
-    val errorContainer: String,
-    val onErrorContainer: String,
-    val outline: String,
-    val outlineVariant: String,
-    val scrim: String
+    val normalColors: PokemonColorSet,
+    val shinyColors: PokemonColorSet
 )

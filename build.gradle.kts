@@ -29,6 +29,8 @@ allprojects {
                         isIncludeAndroidResources = true
                     }
                 }
+
+                vectorDrawables.useSupportLibrary = true
             }
 
             compileOptions {

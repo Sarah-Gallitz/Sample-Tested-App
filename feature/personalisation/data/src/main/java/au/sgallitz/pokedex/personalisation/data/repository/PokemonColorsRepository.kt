@@ -9,6 +9,7 @@ import androidx.compose.ui.graphics.toArgb
 import au.sgallitz.pokedex.extensions.isSystemInDarkTheme
 import au.sgallitz.pokedex.personalisation.data.colors.ContentBasedColors
 import au.sgallitz.pokedex.personalisation.data.image.loadImage
+import au.sgallitz.pokedex.personalisation.domain.model.PokemonColorSet
 import au.sgallitz.pokedex.personalisation.domain.model.PokemonColors
 import au.sgallitz.pokedex.personalisation.domain.repository.PokemonColorsRepository
 import au.sgallitz.pokedex.theme.Colors
@@ -41,21 +42,35 @@ class Material3PokemonColorsRepository(
             .toPokemonColors(isDarkTheme)
 
         if (!isDynamicColorAvailable) {
-            return flowOf(defaultColors)
+            return flowOf(PokemonColors(defaultColors, defaultColors))
         } else {
             val cacheKey = "$pokemonId" + if (isDarkTheme) "-Dark" else "-Light"
             val cachedColors = PokemonColorsCache.inMemoryCache[cacheKey]
 
-            val colors = MutableStateFlow(cachedColors ?: defaultColors)
+            val colors =
+                MutableStateFlow(cachedColors ?: PokemonColors(defaultColors, defaultColors))
 
             GlobalScope.launch {
-                val contentBasedColors = generateColorScheme(
+                val normalContentBasedColors = generateColorScheme(
                     applicationContext,
                     pokemonId,
-                    isDarkTheme
+                    isShiny = false,
+                    isDarkTheme = isDarkTheme
                 )
 
-                contentBasedColors?.let {
+                val shinyContentBasedColors = generateColorScheme(
+                    applicationContext,
+                    pokemonId,
+                    isShiny = true,
+                    isDarkTheme = isDarkTheme
+                )
+
+                if (normalContentBasedColors != null && shinyContentBasedColors != null) {
+                    val contentBasedColors = PokemonColors(
+                        normalColors = normalContentBasedColors,
+                        shinyColors = shinyContentBasedColors
+                    )
+
                     colors.emit(contentBasedColors)
                     PokemonColorsCache.inMemoryCache[cacheKey] = contentBasedColors
                 }
@@ -81,13 +96,26 @@ class Material3PokemonColorsRepository(
 
                         println("XXXXXXX Starting color generation $cacheKey")
                         if (!PokemonColorsCache.inMemoryCache.containsKey(cacheKey)) {
-                            val contentBasedColors = generateColorScheme(
+                            val normalContentBasedColors = generateColorScheme(
                                 applicationContext,
                                 pokemonId,
-                                isDarkTheme
+                                isShiny = false,
+                                isDarkTheme = isDarkTheme
                             )
 
-                            contentBasedColors?.let {
+                            val shinyContentBasedColors = generateColorScheme(
+                                applicationContext,
+                                pokemonId,
+                                isShiny = true,
+                                isDarkTheme = isDarkTheme
+                            )
+
+                            if (normalContentBasedColors != null && shinyContentBasedColors != null) {
+                                val contentBasedColors = PokemonColors(
+                                    normalColors = normalContentBasedColors,
+                                    shinyColors = shinyContentBasedColors
+                                )
+
                                 println("XXXXXXX Completed color generation $cacheKey")
                                 PokemonColorsCache.inMemoryCache[cacheKey] = contentBasedColors
                             }
@@ -102,13 +130,18 @@ class Material3PokemonColorsRepository(
     private suspend fun generateColorScheme(
         context: Context,
         pokemonId: Int,
+        isShiny: Boolean,
         isDarkTheme: Boolean
-    ): PokemonColors? {
+    ): PokemonColorSet? {
         try {
             val image = withContext(Dispatchers.IO) {
                 context.loadImage(
-                    // user dreamworld image as color reference
-                    URL("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/$pokemonId.svg")
+                    // use official artwork image as color reference
+                    if (isShiny) {
+                        URL("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/$pokemonId.png")
+                    } else {
+                        URL("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$pokemonId.png")
+                    }
                 )
             }
 
@@ -129,10 +162,8 @@ class Material3PokemonColorsRepository(
     }
 }
 
-fun ColorScheme.toPokemonColors(
-    isDarkTheme: Boolean
-): PokemonColors {
-    return PokemonColors(
+fun ColorScheme.toPokemonColors(isDarkTheme: Boolean): PokemonColorSet {
+    return PokemonColorSet(
         isDarkTheme = isDarkTheme,
 
         primary = primary.toHexCode(),

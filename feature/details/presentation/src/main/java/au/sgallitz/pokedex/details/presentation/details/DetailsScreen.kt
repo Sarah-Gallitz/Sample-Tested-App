@@ -43,7 +43,7 @@ class DetailsScreen : MviScreen<DetailsUiState, DetailsUiEvent, DetailsNavigatio
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Render(uiState: DetailsUiState, emit: (DetailsUiEvent) -> Unit) {
-        PokemonTheme.WithColors((uiState as? DetailsUiState.HasData)?.data?.pokemonColors) {
+        PokemonTheme.WithColors((uiState as? DetailsUiState.HasData)?.data?.currentColorSet) {
             BackHandler(enabled = true, onBack = { emit(DetailsUiEvent.BackPressed) })
             val scrollState = rememberScrollState()
             Scaffold(
@@ -67,6 +67,12 @@ class DetailsScreen : MviScreen<DetailsUiState, DetailsUiEvent, DetailsNavigatio
                     is DetailsUiState.HasData -> DetailsView.Render(
                         details = uiState.data,
                         scrollState = scrollState,
+                        onShowMaleImage = { emit(DetailsUiEvent.ShowMaleImage) },
+                        onShowFemaleImage = { emit(DetailsUiEvent.ShowFemaleImage) },
+                        onShowFront = { emit(DetailsUiEvent.ShowFront) },
+                        onShowBack = { emit(DetailsUiEvent.ShowBack) },
+                        onShowShiny = { emit(DetailsUiEvent.ShowShiny) },
+                        onShowNormal = { emit(DetailsUiEvent.ShowNormal) },
                         paddingValues = paddingValues
                     )
 

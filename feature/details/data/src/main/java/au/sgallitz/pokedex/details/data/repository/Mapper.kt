@@ -10,11 +10,26 @@ internal fun Pokemon.toDomain(): PokemonDetails {
         pokemonId = this.id,
         name = this.name,
         images = Images(
-            dreamworld = URL("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/$id.svg"),
-            femaleAnim = URL("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/$id.gif"),
-            maleAnim = URL("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/$id.gif"),
-            femaleAnimShiny = URL("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/shiny/$id.gif"),
-            maleAnimShiny = URL("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/shiny/$id.gif")
+            maleAnim = URL(this.sprites.versions.generationV.blackAndWhite.animated.front),
+            maleAnimShiny = URL(this.sprites.versions.generationV.blackAndWhite.animated.frontShiny),
+            femaleAnim = URL(
+                this.sprites.versions.generationV.blackAndWhite.animated.frontFemale
+                    ?: this.sprites.versions.generationV.blackAndWhite.animated.front
+            ),
+            femaleAnimShiny = URL(
+                this.sprites.versions.generationV.blackAndWhite.animated.frontShinyFemale
+                    ?: this.sprites.versions.generationV.blackAndWhite.animated.frontShiny
+            ),
+            maleAnimBack = URL(this.sprites.versions.generationV.blackAndWhite.animated.back),
+            maleAnimShinyBack = URL(this.sprites.versions.generationV.blackAndWhite.animated.backShiny),
+            femaleAnimBack = URL(
+                this.sprites.versions.generationV.blackAndWhite.animated.backFemale
+                    ?: this.sprites.versions.generationV.blackAndWhite.animated.back
+            ),
+            femaleAnimShinyBack = URL(
+                this.sprites.versions.generationV.blackAndWhite.animated.backShinyFemale
+                    ?: this.sprites.versions.generationV.blackAndWhite.animated.backShiny
+            )
         )
     )
 }

@@ -9,9 +9,12 @@ data class PokemonDetails(
 )
 
 data class Images(
-    val dreamworld: URL,
-    val femaleAnim: URL,
     val maleAnim: URL,
+    val maleAnimShiny: URL,
+    val femaleAnim: URL,
     val femaleAnimShiny: URL,
-    val maleAnimShiny: URL
+    val maleAnimBack: URL,
+    val maleAnimShinyBack: URL,
+    val femaleAnimBack: URL,
+    val femaleAnimShinyBack: URL
 )

@@ -35,15 +35,32 @@ class DetailsViewModel(
                         println("XXXXXX\n\n" + it.second)
                         val detail = it.first
                         val colorSet = it.second
-                        _uiState.value = DetailsUiState.HasData(
-                            PokemonData(
-                                id = detail.pokemonId,
-                                pokemonName = detail.name.capitalize(Locale.current),
-                                pokemonNumber = "#" + "%05d".format(detail.pokemonId),
-                                animation = detail.images.maleAnim,
-                                pokemonColors = colorSet
+                        if (_uiState.value is DetailsUiState.HasData) {
+                            _uiState.updateIf<DetailsUiState.HasData, DetailsUiState> {
+                                this.copy(
+                                    data = this.data.copy(
+                                        id = detail.pokemonId,
+                                        pokemonName = detail.name.capitalize(Locale.current),
+                                        pokemonNumber = "#" + "%05d".format(detail.pokemonId),
+                                        animations = detail.images,
+                                        pokemonColors = colorSet
+                                    )
+                                )
+                            }
+                        } else {
+                            _uiState.value = DetailsUiState.HasData(
+                                PokemonData(
+                                    id = detail.pokemonId,
+                                    pokemonName = detail.name.capitalize(Locale.current),
+                                    pokemonNumber = "#" + "%05d".format(detail.pokemonId),
+                                    isShowingShiny = false,
+                                    isShowingFemale = false,
+                                    isShowingBack = false,
+                                    animations = detail.images,
+                                    pokemonColors = colorSet
+                                )
                             )
-                        )
+                        }
                     }
             } catch (e: DomainException) {
                 _uiState.value = DetailsUiState.HasError(e.errorReason)
@@ -55,6 +72,56 @@ class DetailsViewModel(
         when (event) {
             is DetailsUiEvent.BackPressed -> navigate(DetailsNavigationRequest.CloseDetails)
             is DetailsUiEvent.BottomOfListReached -> {}
+
+            DetailsUiEvent.ShowFront -> {
+                _uiState.updateIf<DetailsUiState.HasData, DetailsUiState> {
+                    this.copy(data = this.data.copy(isShowingBack = false))
+                }
+            }
+
+            DetailsUiEvent.ShowBack -> {
+                _uiState.updateIf<DetailsUiState.HasData, DetailsUiState> {
+                    this.copy(data = this.data.copy(isShowingBack = true))
+                }
+            }
+
+            DetailsUiEvent.ShowMaleImage -> {
+                _uiState.updateIf<DetailsUiState.HasData, DetailsUiState> {
+                    this.copy(data = this.data.copy(isShowingFemale = false))
+                }
+            }
+
+            DetailsUiEvent.ShowFemaleImage -> {
+                _uiState.updateIf<DetailsUiState.HasData, DetailsUiState> {
+                    this.copy(data = this.data.copy(isShowingFemale = true))
+                }
+            }
+
+            DetailsUiEvent.ShowNormal -> {
+                _uiState.updateIf<DetailsUiState.HasData, DetailsUiState> {
+                    this.copy(data = this.data.copy(isShowingShiny = false))
+                }
+            }
+
+            DetailsUiEvent.ShowShiny -> {
+                _uiState.updateIf<DetailsUiState.HasData, DetailsUiState> {
+                    this.copy(
+                        data = this.data.copy(
+                            isShowingShiny = true
+                        )
+                    )
+                }
+            }
         }
+    }
+}
+
+
+inline fun <reified T, V> MutableStateFlow<V>.updateIf(
+    update: T.() -> T
+) where T : V {
+    val current = this.value
+    if (current is T) {
+        this.value = current.update()
     }
 }

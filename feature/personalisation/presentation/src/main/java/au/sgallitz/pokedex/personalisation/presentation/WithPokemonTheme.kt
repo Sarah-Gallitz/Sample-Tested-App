@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import au.sgallitz.pokedex.personalisation.domain.model.PokemonColors
+import au.sgallitz.pokedex.personalisation.domain.model.PokemonColorSet
 import au.sgallitz.pokedex.personalisation.presentation.preview.getBulbasaurColors
 import au.sgallitz.pokedex.theme.Styles.PokedexTheme
 import au.sgallitz.pokedex.theme.ThemedPreview
@@ -26,7 +26,7 @@ class PokemonTheme {
     companion object {
         @Composable
         fun WithColors(
-            colors: PokemonColors?,
+            colors: PokemonColorSet?,
             content: @Composable () -> Unit
         ) {
             PokedexTheme(
@@ -40,7 +40,7 @@ class PokemonTheme {
     @Composable
     private fun PreviewBulbasaur() = ThemedPreview {
         val colors = getBulbasaurColors(isSystemInDarkTheme())
-        WithColors(colors) {
+        WithColors(colors.normalColors) {
             Column(
                 Modifier
                     .fillMaxWidth()
@@ -60,7 +60,7 @@ class PokemonTheme {
     @Composable
     private fun PreviewBulbasaurDark() = ThemedPreview {
         val colors = getBulbasaurColors(isSystemInDarkTheme())
-        WithColors(colors) {
+        WithColors(colors.normalColors) {
             Column(
                 Modifier
                     .fillMaxWidth()
@@ -77,7 +77,7 @@ class PokemonTheme {
     }
 }
 
-fun PokemonColors.toMaterialColors(): ColorScheme {
+fun PokemonColorSet.toMaterialColors(): ColorScheme {
     return if (this.isDarkTheme) {
         darkColorScheme(
             primary = primary.toColor(),
