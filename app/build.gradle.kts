@@ -16,6 +16,7 @@ android {
 
 dependencies {
     implementation(libs.androidx.compose.activity)
+    implementation(libs.androidx.core.splashscreen)
 
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.material3)
