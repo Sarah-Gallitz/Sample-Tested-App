@@ -1,0 +1,24 @@
+[versions]
+kotlinAndroid = "1.9.22"
+androidGradlePlugin = "8.2.2"
+ktLint = "3.13.0"
+
+apollo = "3.7.5"
+
+composeBom = "2024.02.00"
+composeCompiler = "1.5.8"
+androidxActivity = "1.8.2"
+
+[libraries]
+compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+compose-compiler = { group = "androidx.compose", name = "compose-compiler", version.ref = "composeCompiler" }
+compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+
+androidx-compose-activity = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinAndroid" }
+kt-lint = { id = "org.jmailen.kotlinter", version.ref = "ktLint" }
+graphql-apollo3 = { id = "com.apollographql.apollo3", version.ref = "apollo" }
