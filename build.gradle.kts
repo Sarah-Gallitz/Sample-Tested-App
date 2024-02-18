@@ -16,13 +16,16 @@ allprojects {
 
     afterEvaluate {
         extensions.findByType(BaseExtension::class)?.apply {
+            val appVersionCode = 1
+            val appVersionName = "1.0.0-LOCAL"
+
             defaultConfig {
                 minSdk = 21
                 targetSdk = 34
                 compileSdkVersion(34)
 
-                versionCode = 1
-                versionName = "1.0"
+                versionCode = appVersionCode
+                versionName = appVersionName
 
 
                 testOptions {
