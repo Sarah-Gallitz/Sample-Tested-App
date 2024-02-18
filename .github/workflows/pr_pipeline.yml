@@ -2,14 +2,29 @@ name: PR
 
 on: pull_request
 
-env:
-  BUILD_NUMBER: "echo $(( $(date +%s) / 60 ))"
-
 jobs:
-  lint_kotlin:
-    name: 'Lint Kotlin'
+  make_build_number:
+    name: 'Make Build Number'
     runs-on: ubuntu-latest
     steps:
+      - id: make
+        run: |
+          calculated_num=$(( $(date +%s) / 60 ))
+          echo "Build number is $calculated_num"
+          echo "build_number=$calculated_num" >> "$GITHUB_OUTPUT"
+    outputs:
+      build_number: ${{ steps.make.outputs.build_number }}
+
+  lint_kotlin:
+    name: 'Lint Kotlin'
+    needs: 'make_build_number'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set build number
+        env:
+          BUILD_NUMBER: ${{ needs.make_build_number.outputs.build_number }}
+        run: echo "Build number is $BUILD_NUMBER"
+
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -27,8 +42,14 @@ jobs:
 
   build_artifacts:
     name: 'Build Artifacts'
+    needs: 'make_build_number'
     runs-on: ubuntu-latest
     steps:
+      - name: Set build number
+        env:
+          BUILD_NUMBER: ${{ needs.make_build_number.outputs.build_number }}
+        run: echo "Build number is $BUILD_NUMBER"
+
       - name: Checkout code
         uses: actions/checkout@v4
 
