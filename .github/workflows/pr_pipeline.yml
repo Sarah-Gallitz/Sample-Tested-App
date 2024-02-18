@@ -1,0 +1,81 @@
+name: PR
+
+on: pull_request
+
+jobs:
+  make_build_number:
+    name: 'Make Build Number'
+    runs-on: ubuntu-latest
+    steps:
+      - id: make
+        run: |
+          calculated_num=$(( $(date +%s) / 60 ))
+          echo "Build number is $calculated_num"
+          echo "build_number=$calculated_num" >> "$GITHUB_OUTPUT"
+    outputs:
+      build_number: ${{ steps.make.outputs.build_number }}
+
+  lint_kotlin:
+    name: 'Lint Kotlin'
+    needs: 'make_build_number'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Lint Check
+        run: ./gradlew lintKotlin
+
+  build_artifacts:
+    name: 'Build Artifacts'
+    needs: 'make_build_number'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set build number
+        run: |
+          build_num=${{ needs.make_build_number.outputs.build_number }}
+          echo "BUILD_NUMBER=$build_num" >> $GITHUB_ENV
+          echo "Build number is $build_num"
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set app version
+        run: |
+          sed -i "s/appVersionCode = .*/appVersionCode = $BUILD_NUMBER/g" build.gradle.kts
+          sed -i "s/appVersionName = \"1.0.0-LOCAL\"/appVersionName = \"1.0.$BUILD_NUMBER\"/g" build.gradle.kts
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Build APKs
+        run: ./gradlew build
+
+      - name: Upload Release APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'pokedex-release-pr${{ github.event.number }}-v${{ env.BUILD_NUMBER }}.apk'
+          path: 'app/build/outputs/apk/release/*.apk'
+          if-no-files-found: 'error'
+
+      - name: Upload Debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'pokedex-debug-pr${{ github.event.number }}-v${{ env.BUILD_NUMBER }}.apk'
+          path: 'app/build/outputs/apk/debug/*.apk'
+          if-no-files-found: 'error'
