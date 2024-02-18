@@ -33,7 +33,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build number
-        run: echo '$BUILD_NUMBER'
+        run: echo "$BUILD_NUMBER"
 
       - name: Set app version
         run: sed -i "s/appVersionCode = .*/appVersionCode = $BUILD_NUMBER/g" build.gradle.kts
