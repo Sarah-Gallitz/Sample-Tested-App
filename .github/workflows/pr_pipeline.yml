@@ -1,0 +1,40 @@
+name: PR Build and Test
+
+on: pull_request
+
+jobs:
+  lint_kotlin:
+    name: ':kotlin: Lint Kotlin'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'zulu'
+          cache: 'gradle'
+      - run: chmod +x gradlew
+      - run: ./gradlew lintKotlin
+
+  build_artifacts:
+    name: ':android: Build Artifacts'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'zulu'
+          cache: 'gradle'
+      - run: chmod +x gradlew
+      - run: ./gradlew build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: 'pokedex-release-pr-${{ github.event.number }}-v${{ github.run_id }}.apk'
+          path: '/app/build/outputs/apk/release/*.apk'
+          if-no-files-found: 'error'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: 'pokedex-debug-pr-${{ github.event.number }}-v${{ github.run_id }}.apk'
+          path: '/app/build/outputs/apk/debug/*.apk'
+          if-no-files-found: 'error'
