@@ -3,7 +3,7 @@ name: PR
 on: pull_request
 
 env:
-  BUILD_NUMBER: '$(( $(date +%s) / 60 ))'
+  BUILD_NUMBER: "echo $(( $(date +%s) / 60 ))"
 
 jobs:
   lint_kotlin:
